@@ -11,6 +11,9 @@ module.exports = {
       animation: {
         'slide-down': 'slide-down 0.2s ease-out',
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
     },
   },
 };

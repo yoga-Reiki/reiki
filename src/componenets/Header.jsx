@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import reikiLogo from '../assets/img/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 function Header() {
     const location = useLocation();
@@ -36,7 +37,7 @@ function Header() {
         ));
 
     return (
-        <header className="w-full bg-white shadow-sm">
+        <header className="w-full bg-white font-[Open Sans]">
             <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 lg:px-8 relative">
                 {/* Left Nav (desktop) */}
                 <div className="hidden lg:flex items-center gap-8">
@@ -49,7 +50,7 @@ function Header() {
                         <img
                             src={reikiLogo}
                             alt="Logo"
-                            className="w-32 object-contain mb-1 hover:cursor-pointer transition-transform transform"
+                            className="w-28 md:w-40 object-contain mb-1 hover:cursor-pointer transition-transform transform"
                         />
                     </Link>
                 </div>
@@ -57,21 +58,23 @@ function Header() {
                 {/* Right Nav (desktop) */}
                 <div className="hidden lg:flex items-center gap-8">
                     {renderLinks().slice(4)}
-                    <Link
-                        to={"/login"}
-                        className="animated-border ml-2 px-[24px] py-[12px] bg-[#EA7913] text-white rounded-full font-medium shadow hover:bg-orange-400 transition text-base"
-                    >
-                        Login
+                    <Link to={"/login"}>
+                        <div className="relative inline-block rounded-full p-[3px] hover:bg-none bg-[linear-gradient(90deg,_rgba(255,121,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">
+                            <button className="inline-flex items-center space-x-1.5 px-8 py-2 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-lg w-full h-full border-[linear-gradient(90deg,_rgba(255,1    21,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">
+                                <span>Login</span>
+                            </button>
+                        </div>
                     </Link>
                 </div>
 
                 {/* mobile menu */}
-                <div className='flex items-center space-x-4 md:space-x-10 lg:hidden'>
-                    <Link
-                        to={"/login"}
-                        className="animated-border ml-2 px-[24px] py-[12px] bg-[#EA7913] text-white rounded-full font-medium shadow hover:bg-orange-400 transition text-base"
-                    >
-                        Login
+                <div className='flex items-center space-x-2 md:space-x-10 lg:hidden'>
+                    <Link to={"/login"}>
+                        <div className="relative inline-block rounded-full p-[3px] bg-[linear-gradient(90deg,_rgba(255,121,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">
+                            <button className="inline-flex items-center space-x-1.5 px-6 py-1.5 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:bg-[#F39C2C] active:bg-[#EA7913] hover:cursor-pointer transition text-sm w-full h-full">
+                                <span>Login</span>
+                            </button>
+                        </div>
                     </Link>
                     <button
                         className="text-3xl text-[#EA7913] focus:outline-none"
