@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Product1 from "../../assets/img/Product 1.png"
 import Product2 from "../../assets/img/Product 2.png"
 import Product3 from "../../assets/img/Product 3.png"
+import Left from "../../assets/svg-icon/left.svg"
+import Right from "../../assets/svg-icon/right.svg"
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 
 function Products() {
@@ -92,7 +94,7 @@ function Products() {
                             className={`w-12 h-12 bg-[#FCEAC9] hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300
                                 ${currentSlide === 0 ? 'bg-[#FEF8EC] cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                            <IoIosArrowRoundBack />
+                            <img src={Left} alt="Previous" className="w-3 h-2.5" />
                         </button>
                         <button
                             onClick={nextSlide}
@@ -100,13 +102,13 @@ function Products() {
                             className={`w-12 h-12 bg-[#FCEAC9] hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300
                                 ${currentSlide >= products.length - cardsToShow ? 'bg-[#FEF8EC] cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                            <IoIosArrowRoundForward />
+                            <img src={Right} alt="Previous" className="w-3 h-2.5" />
                         </button>
                     </div>
                 </div>
 
                 {/* Course Cards Container */}
-                <div className="relative">
+                <div className="relative overflow-hidden">
                     <div
                         className="flex transition-transform duration-500 ease-in-out"
                         style={{
@@ -134,7 +136,7 @@ function Products() {
                                         {/* Play Button Overlay */}
                                         <div className="absolute top-4 right-4">
                                             <button className="w-12 h-12 bg-[#FCEAC9] hover:cursor-pointer hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300 shadow-lg">
-                                                <IoIosArrowRoundForward />
+                                                <img src={Right} alt="Previous" className="w-3 h-2.5" />
                                             </button>
                                         </div>
                                         {/* product Content */}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Course1 from "../../assets/img/course1.png"
 import Course2 from "../../assets/img/course2.png"
 import Course3 from "../../assets/img/course3.png"
+import Left from "../../assets/svg-icon/left.svg"
+import Right from "../../assets/svg-icon/right.svg"
 import { IoIosArrowRoundForward, IoIosArrowRoundBack } from "react-icons/io";
 
 function Courses() {
@@ -82,7 +84,7 @@ function Courses() {
         <section className="px-4 py-9 sm:py-14 md:py-16">
             <div>
                 {/* Header with Navigation Arrows */}
-                <div className="flex flex-row items-center justify-between pb-12 gap-10">    
+                <div className="flex flex-row items-center justify-between pb-12 gap-10">
                     <div className="flex-1">
                         <h2 className="text-3xl md:text-5xl font-bold text-[#464646] mb-4">
                             Courses
@@ -99,7 +101,7 @@ function Courses() {
                             className={`w-12 h-12 bg-[#FCEAC9] hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300
                                 ${currentSlide === 0 ? 'bg-[#FEF8EC] cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                            <IoIosArrowRoundBack />
+                            <img src={Left} alt="Previous" className="w-3 h-2.5" />
                         </button>
                         <button
                             onClick={nextSlide}
@@ -107,13 +109,13 @@ function Courses() {
                             className={`w-12 h-12 bg-[#FCEAC9] hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300
                                 ${currentSlide >= courses.length - cardsToShow ? 'bg-[#FEF8EC] cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                            <IoIosArrowRoundForward />
+                            <img src={Right} alt="Previous" className="w-3 h-2.5" />
                         </button>
                     </div>
                 </div>
 
                 {/* Course Cards Container */}
-                <div className="relative">
+                <div className="relative overflow-hidden">
                     <div
                         className="flex transition-transform duration-500 ease-in-out"
                         style={{
@@ -141,7 +143,7 @@ function Courses() {
                                         {/* Play Button Overlay */}
                                         <div className="absolute top-4 right-4">
                                             <button className="w-12 h-12 bg-[#FCEAC9] hover:cursor-pointer hover:bg-[#FEF8EC] rounded-full flex items-center justify-center transition-all duration-300 shadow-lg">
-                                                <IoIosArrowRoundForward />
+                                                <img src={Right} alt="Previous" className="w-3 h-2.5" />
                                             </button>
                                         </div>
                                         {/* Course Content */}

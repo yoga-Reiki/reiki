@@ -3,10 +3,10 @@ import Img1 from '../../assets/img/Img1.png';
 
 function Consulting() {
     return (
-        <section className="py-9 sm:py-14 md:py-16 px-4 flex justify-center text-[#464646]">
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-12 xl:gap-16 items-center md:items-start">
+        <section className="py-9 sm:py-14 md:py-16 px-4 flex justify-center text-[#464646] overflow-hidden">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-12 items-center md:items-start">
                 {/* Image */}
-                <div className="w-full lg:w-[550px] xl:w-[756px] flex-shrink-0">
+                <div className="w-full lg:w-[550px] xl:w-[720px] flex-shrink-0">
                     <img
                         src={Img1}
                         alt="Consulting"
@@ -14,7 +14,7 @@ function Consulting() {
                     />
                 </div>
                 {/* Content */}
-                <div className="w-full lg:w-[394px] xl:w-[580px] flex flex-col justify-between h-full">
+                <div className="w-full lg:w-[394px] xl:w-[430px] flex flex-col justify-between h-full">
                     <div>
                         <h2 className="text-2xl md:text-[56px] font-semibold mb-4">Free Consulting</h2>
                         <p className="mb-6 text-sm md:text-lg">

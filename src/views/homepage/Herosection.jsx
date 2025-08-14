@@ -1,6 +1,5 @@
 import React from 'react'
-import Hero_background from '../../assets/video/bac.mp4'
-import { IoIosArrowRoundForward } from "react-icons/io";
+import Hero_background from '../../assets/video/hero video.mp4'
 import Hero_avtar from '../../assets/img/hero avtar.png'
 import icon1 from '../../assets/img/Reiki Symbols 1.png'
 import icon2 from '../../assets/img/Reiki Symbols 2.png'
