@@ -4,7 +4,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 function Introsection() {
     return (
-        <section className="relative w-full bg-white px-4 py-9 sm:py-14 md:py-16">
+        <section className="relative w-full bg-white px-4 xl:px-0 py-9 sm:py-14 md:py-16">
             <div className="flex flex-col items-center text-center">
                 {/* Heading */}
                 <h1 className="font-delcy text-[#7C7C7C] text-4xl sm:text-4xl md:text-5xl lg:text-[64px] xl:text-[96px] leading-tight lg:leading-[80px] xl:leading-[104px] mb-4 sm:mb-6">

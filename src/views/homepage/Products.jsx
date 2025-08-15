@@ -74,7 +74,7 @@ function Products() {
     }
 
     return (
-        <section className="px-4 py-9 sm:py-14 md:py-16">
+        <section className="px-4 xl:px-0 py-9 sm:py-14 md:py-16">
             <div>
                 {/* Header with Navigation Arrows */}
                 <div className="flex flex-row items-center justify-between pb-12 gap-10">

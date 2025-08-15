@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-    <div className='overflow-hidden max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-[100px] pb-9 sm:pb-14 md:pb-16'>
+    <div className='overflow-hidden max-w-[1440px] mx-auto px-4 xl:px-[100px] pb-9 sm:pb-14 md:pb-16'>
       <footer className="bg-[#FEF8EC] rounded-3xl text-[#464646] px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12 lg:py-15">
 
         <div>

@@ -4,7 +4,7 @@ import musicCard from "../../assets/img/muiscCard.png"
 
 function Music() {
     return (
-        <section className="w-full py-9 sm:py-14 md:py-16 px-4">
+        <section className="w-full py-9 sm:py-14 md:py-16 px-4 xl:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left Column: Title & Description */}
                 <div className="lg:col-span-2 flex flex-col gap-6">

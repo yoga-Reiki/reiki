@@ -74,7 +74,7 @@ function Testimonials() {
     }
 
     return (
-        <section className="px-4 py-16 text-center text-[#464646]">
+        <section className="px-4 xl:px-0 py-16 text-center text-[#464646]">
             {/* Header */}
             <div className="flex items-center justify-between mb-10">
                 <h2 className="text-[28px] md:text-4xl font-Raleway"><span className="font-bold">Testimonials</span></h2>

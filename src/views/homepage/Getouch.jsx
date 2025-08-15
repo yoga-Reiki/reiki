@@ -108,7 +108,7 @@ function Getouch() {
     )
 
     return (
-        <section className="px-4 py-9 sm:py-14 md:py-16 text-[#464646]">
+        <section className="px-4 xl:px-0 py-9 sm:py-14 md:py-16 text-[#464646]">
             {/* Responsive background image container */}
             <div className="relative bg-cover bg-center bg-no-repeat p-2 rounded-3xl overflow-hidden"
                 style={{ 

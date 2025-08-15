@@ -38,7 +38,7 @@ function Faqs() {
     }
 
     return (
-        <section className="py-9 sm:py-14 md:py-16 px-4 text-[#464646]">
+        <section className="py-9 sm:py-14 md:py-16 px-4 xl:px-0 text-[#464646]">
             <div>
                 {/* FAQ Container - Flexbox Layout */}
                 <div className="flex flex-col lg:flex-row gap-0 lg:gap-8 lg:gap-12">
