@@ -1,21 +1,23 @@
 import React from 'react';
 import musicTherapy from '../../assets/img/musicTherapy.png';
 import musicCard from "../../assets/img/muiscCard.png"
+import { useNavigate } from 'react-router-dom';
 
 function Music() {
+
+    const navigate = useNavigate()
+
     return (
         <section className="w-full py-9 sm:py-14 md:py-16 px-4 xl:px-0">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Left Column: Title & Description */}
                 <div className="lg:col-span-2 flex flex-col gap-6">
-                    {/* Title & Description */}
                     <div className="bg-[#F8F8F8] rounded-4xl p-6 md:p-9 h-[345px] flex flex-col justify-between">
                         <h2 className="text-3xl md:text-[56px] font-bold text-[#464646]">Music Therapy</h2>
                         <p className="text-[#464646] text-base md:text-lg">
                             Shree Sai Reiki is dedicated to healing, balance, and spiritual growth through the ancient practice of Reiki. We help individuals reconnect with their inner energy through guided treatments, courses, and supportive practices. Whether you're seeking healing or want to become a Reiki practitioner, we’re here to support your journey.
                         </p>
                     </div>
-                    {/* Centered Image */}
                     <img
                         src={musicTherapy}
                         alt="Music Therapy"
@@ -30,7 +32,6 @@ function Music() {
                             alt="Therapy Session"
                             className="w-full h-[617px] md:h-full object-cover rounded-4xl"
                         />
-                        {/* Course Content */}
                         <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-white bg-opacity-90 backdrop-blur-md rounded-3xl text-center">
                             <div className="flex-1 flex flex-col justify-between p-4.5 h-[270px] md:h-[390px]">
                                 <div className='text-start'>
@@ -47,7 +48,7 @@ function Music() {
                                         <span className="text-sm text-red-400 line-through">$120</span>
                                     </div>
                                     <div className="relative inline-block rounded-full px-[4px] py-[2.5px] hover:bg-none bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] hover:cursor-pointer">
-                                        <button className="px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F1F1F1] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base">
+                                        <button onClick={() => navigate('/music-therapy')} className="px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F1F1F1] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base">
                                             Get 21 days free music therapy
                                         </button>
                                     </div>

@@ -1,243 +1,263 @@
-// import React, { useEffect, useMemo, useRef, useState } from 'react'
-// import Card1 from '../../assets/img/card1.png';
-// import Card2 from '../../assets/img/card2.png';
-// import Card3 from '../../assets/img/card3.png';
+import { useLayoutEffect, useRef, useCallback } from "react";
+import Lenis from "lenis";
 
-// function StackedCard({ image, title, description, isActive, zIndex }) {
-//     return (
-//         <div className="relative bg-cover bg-center bg-no-repeat p-2 rounded-3xl overflow-hidden my-6"
-//             style={{
-//                 backgroundImage: `url(${image})`,
-//                 backgroundSize: 'cover',
-//                 backgroundPosition: 'center',
-//                 backgroundRepeat: 'no-repeat'
-//             }}>
-//             <div className='flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12 h-[800px] md:h-full'>
-//                 <div className='w-full md:w-[80%] lg:w-1/2'></div>
-//                 <div className='w-full md:w-full lg:w-1/2'>
-//                     <div className="bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 p-6 sm:px-15 sm:py-6 w-full max-w-xl">
-//                         <h3 className="text-2xl sm:text-3xl font-bold pb-4.5">{title}</h3>
-//                         <p className='pb-13'>{description}</p>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
+export const ScrollStackItem = ({ children, itemClassName = "" }) => (
+  <div
+    className={`scroll-stack-card relative w-full h-64 my-8 box-border origin-top will-change-transform ${itemClassName}`.trim()}
+    style={{
+      backfaceVisibility: 'hidden',
+      transformStyle: 'preserve-3d',
+    }}
+  >
+    {children}
+  </div>
+);
 
-// function ChooseCard() {
-//     const items = useMemo(
-//         () => [
-//             {
-//                 key: 'authentic',
-//                 image: Card1,
-//                 title: 'Authentic Healing with a Personal Touch',
-//                 description:
-//                     'Experience the essence of true Reiki with personalized guidance and energy healing that connects deeply with your spiritual and emotional self. At Shree Sai Reiki, each session is rooted in compassion, intuition, and genuine care — helping you find balance, peace, and clarity.',
-//             },
-//             {
-//                 key: 'learn',
-//                 image: Card2,
-//                 title: 'Learn Reiki at Your Pace, Anytime',
-//                 description:
-//                     'Learn Reiki anytime, anywhere. Our courses are designed for modern learners — completely online, easy to follow, and tailored to your personal rhythm. Whether you’re a beginner or continuing your journey, our platform adapts to your growth without pressure.',
-//             },
-//             {
-//                 key: 'music',
-//                 image: Card3,
-//                 title: '21-Day Free Music Therapy + Auto Certificate',
-//                 description:
-//                     'Relax your mind and uplift your energy with our unique 21-day music therapy program, featuring calming Reiki-infused audio and guided progress tracking. This journey offers healing through sound — and rewards you with a personalized certificate upon completion.',
-//             },
-//         ],
-//         []
-//     )
+const ChooseCard = ({
+  children,
+  className = "",
+  itemDistance = 150,
+  itemScale = 0.03,
+  itemStackDistance = 30,
+  stackPosition = "20%",
+  scaleEndPosition = "10%",
+  baseScale = 0.9,
+  scaleDuration = 0.5,
+  rotationAmount = 0,
+  blurAmount = 0,
+  onStackComplete,
+}) => {
+  const scrollerRef = useRef(null);
+  const stackCompletedRef = useRef(false);
+  const animationFrameRef = useRef(null);
+  const lenisRef = useRef(null);
+  const cardsRef = useRef([]);
+  const lastTransformsRef = useRef(new Map());
+  const isUpdatingRef = useRef(false);
 
-//     const [activeIndex, setActiveIndex] = useState(0)
-//     const cardRefs = useRef([])
+  const calculateProgress = useCallback((scrollTop, start, end) => {
+    if (scrollTop < start) return 0;
+    if (scrollTop > end) return 1;
+    return (scrollTop - start) / (end - start);
+  }, []);
 
-//     useEffect(() => {
-//         const observer = new IntersectionObserver(
-//             entries => {
-//                 entries.forEach(entry => {
-//                     const idxAttr = entry.target.getAttribute('data-index')
-//                     const idx = idxAttr ? parseInt(idxAttr, 10) : 0
-//                     if (entry.isIntersecting) {
-//                         setActiveIndex(prev => (idx > prev ? idx : prev))
-//                     }
-//                 })
-//             },
-//             { root: null, threshold: 0.6 }
-//         )
+  const parsePercentage = useCallback((value, containerHeight) => {
+    if (typeof value === 'string' && value.includes('%')) {
+      return (parseFloat(value) / 100) * containerHeight;
+    }
+    return parseFloat(value);
+  }, []);
 
-//         cardRefs.current.forEach((el) => el && observer.observe(el))
-//         return () => observer.disconnect()
-//     }, [])
+  const updateCardTransforms = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller || !cardsRef.current.length || isUpdatingRef.current) return;
 
-//     return (
-//         <section className="relative px-4 py-9 sm:py-14 md:py-16">
-//             <div>
-//                 <div className="lg:col-span-2">
-//                     <h2 className="text-3xl md:text-5xl font-bold text-[#464646] pb-6">
-//                         Why Choose Us ?
-//                     </h2>
-//                 </div>
+    isUpdatingRef.current = true;
 
-//                 <div className="lg:col-span-3 relative">
-//                     <div className="relative">
-//                         {items.map((item, index) => (
-//                             <div>
-//                                 <StackedCard
-//                                     image={item.image}
-//                                     title={item.title}
-//                                     description={item.description}
-//                                     isActive={index <= activeIndex}
-//                                     zIndex={20 + index}
-//                                 />
-//                             </div>
-//                         ))}
-//                     </div>
-//                 </div>
-//             </div>
-//         </section>
-//     )
-// }
+    const scrollTop = scroller.scrollTop;
+    const containerHeight = scroller.clientHeight;
+    const stackPositionPx = parsePercentage(stackPosition, containerHeight);
+    const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
+    const endElement = scroller.querySelector('.scroll-stack-end');
+    const endElementTop = endElement ? endElement.offsetTop : 0;
 
-// export default ChooseCard
+    cardsRef.current.forEach((card, i) => {
+      if (!card) return;
 
+      const cardTop = card.offsetTop;
+      const triggerStart = cardTop - stackPositionPx - (itemStackDistance * i);
+      const triggerEnd = cardTop - scaleEndPositionPx;
+      const pinStart = cardTop - stackPositionPx - (itemStackDistance * i);
+      const pinEnd = endElementTop - containerHeight / 2;
 
+      const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
+      const targetScale = baseScale + (i * itemScale);
+      const scale = 1 - scaleProgress * (1 - targetScale);
+      const rotation = rotationAmount ? i * rotationAmount * scaleProgress : 0;
 
-import React, { useMemo, useRef, useState, useLayoutEffect } from "react";
-import Card1 from "../../assets/img/card1.png";
-import Card2 from "../../assets/img/card2.png";
-import Card3 from "../../assets/img/card3.png";
+      let blur = 0;
+      if (blurAmount) {
+        let topCardIndex = 0;
+        for (let j = 0; j < cardsRef.current.length; j++) {
+          const jCardTop = cardsRef.current[j].offsetTop;
+          const jTriggerStart = jCardTop - stackPositionPx - (itemStackDistance * j);
+          if (scrollTop >= jTriggerStart) {
+            topCardIndex = j;
+          }
+        }
 
-function StackedCard({ image, title, description, zIndex, translateY }) {
+        if (i < topCardIndex) {
+          const depthInStack = topCardIndex - i;
+          blur = Math.max(0, depthInStack * blurAmount);
+        }
+      }
+
+      let translateY = 0;
+      const isPinned = scrollTop >= pinStart && scrollTop <= pinEnd;
+
+      if (isPinned) {
+        translateY = scrollTop - cardTop + stackPositionPx + (itemStackDistance * i);
+      } else if (scrollTop > pinEnd) {
+        translateY = pinEnd - cardTop + stackPositionPx + (itemStackDistance * i);
+      }
+
+      const newTransform = {
+        translateY: Math.round(translateY * 100) / 100,
+        scale: Math.round(scale * 1000) / 1000,
+        rotation: Math.round(rotation * 100) / 100,
+        blur: Math.round(blur * 100) / 100
+      };
+
+      const lastTransform = lastTransformsRef.current.get(i);
+      const hasChanged = !lastTransform ||
+        Math.abs(lastTransform.translateY - newTransform.translateY) > 0.1 ||
+        Math.abs(lastTransform.scale - newTransform.scale) > 0.001 ||
+        Math.abs(lastTransform.rotation - newTransform.rotation) > 0.1 ||
+        Math.abs(lastTransform.blur - newTransform.blur) > 0.1;
+
+      if (hasChanged) {
+        const transform = `translate3d(0, ${newTransform.translateY}px, 0) scale(${newTransform.scale}) rotate(${newTransform.rotation}deg)`;
+        const filter = newTransform.blur > 0 ? `blur(${newTransform.blur}px)` : '';
+
+        card.style.transform = transform;
+        card.style.filter = filter;
+
+        lastTransformsRef.current.set(i, newTransform);
+      }
+
+      if (i === cardsRef.current.length - 1) {
+        const isInView = scrollTop >= pinStart && scrollTop <= pinEnd;
+        if (isInView && !stackCompletedRef.current) {
+          stackCompletedRef.current = true;
+          onStackComplete?.();
+        } else if (!isInView && stackCompletedRef.current) {
+          stackCompletedRef.current = false;
+        }
+      }
+    });
+
+    isUpdatingRef.current = false;
+  }, [
+    itemScale,
+    itemStackDistance,
+    stackPosition,
+    scaleEndPosition,
+    baseScale,
+    rotationAmount,
+    blurAmount,
+    onStackComplete,
+    calculateProgress,
+    parsePercentage,
+  ]);
+
+  const handleScroll = useCallback(() => {
+    updateCardTransforms();
+  }, [updateCardTransforms]);
+
+  const setupLenis = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const lenis = new Lenis({
+      wrapper: scroller,
+      content: scroller.querySelector('.scroll-stack-inner'),
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 2,
+      infinite: false,
+      wheelMultiplier: 1,
+      lerp: 0.1,
+      syncTouch: true,
+      syncTouchLerp: 0.075,
+    });
+
+    lenis.on('scroll', handleScroll);
+
+    const raf = (time) => {
+      lenis.raf(time);
+      animationFrameRef.current = requestAnimationFrame(raf);
+    };
+    animationFrameRef.current = requestAnimationFrame(raf);
+
+    lenisRef.current = lenis;
+    return lenis;
+  }, [handleScroll]);
+
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const cards = Array.from(scroller.querySelectorAll(".scroll-stack-card"));
+    cardsRef.current = cards;
+    const transformsCache = lastTransformsRef.current;
+
+    cards.forEach((card, i) => {
+      if (i < cards.length - 1) {
+        card.style.marginBottom = `${itemDistance}px`;
+      }
+      card.style.willChange = 'transform, filter';
+      card.style.transformOrigin = 'top center';
+      card.style.backfaceVisibility = 'hidden';
+      card.style.transform = 'translateZ(0)';
+      card.style.webkitTransform = 'translateZ(0)';
+      card.style.perspective = '1000px';
+      card.style.webkitPerspective = '1000px';
+    });
+
+    setupLenis();
+
+    updateCardTransforms();
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
+      stackCompletedRef.current = false;
+      cardsRef.current = [];
+      transformsCache.clear();
+      isUpdatingRef.current = false;
+    };
+  }, [
+    itemDistance,
+    itemScale,
+    itemStackDistance,
+    stackPosition,
+    scaleEndPosition,
+    baseScale,
+    scaleDuration,
+    rotationAmount,
+    blurAmount,
+    onStackComplete,
+    setupLenis,
+    updateCardTransforms,
+  ]);
+
   return (
     <div
-      className="absolute top-0 left-0 w-full transition-transform duration-200 ease-out"
+      className={`relative w-full h-full overflow-hidden overflow-y-auto overflow-x-visible ${className}`.trim()}
+      ref={scrollerRef}
       style={{
-        transform: `translateY(${translateY}px)`,
-        zIndex,
+        overscrollBehavior: 'contain',
+        WebkitOverflowScrolling: 'touch',
+        scrollBehavior: 'smooth',
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        willChange: 'scroll-position',
+        overflow: 'hidden',
       }}
     >
-      <div
-        className="relative bg-cover bg-center bg-no-repeat p-2 rounded-3xl overflow-hidden"
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          height: "400px",
-        }}
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12 h-full">
-          <div className="w-full md:w-[80%] lg:w-1/2"></div>
-          <div className="w-full md:w-full lg:w-1/2">
-            <div className="bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 p-6 sm:px-15 sm:py-6 w-full max-w-xl">
-              <h3 className="text-2xl sm:text-3xl font-bold pb-4.5">{title}</h3>
-              <p className="pb-13">{description}</p>
-            </div>
-          </div>
-        </div>
+      <div className="scroll-stack-inner pt-[4rem] px-20 pb-[20vh]">
+        {children}
+        <div className="scroll-stack-end w-full h-[1px]" />
       </div>
     </div>
   );
-}
+};
 
-export default function ChooseCard() {
-  const items = useMemo(
-    () => [
-      {
-        image: Card1,
-        title: "Authentic Healing with a Personal Touch",
-        description:
-          "Experience the essence of true Reiki with personalized guidance...",
-      },
-      {
-        image: Card2,
-        title: "Learn Reiki at Your Pace, Anytime",
-        description:
-          "Learn Reiki anytime, anywhere. Our courses are designed for modern learners...",
-      },
-      {
-        image: Card3,
-        title: "21-Day Free Music Therapy + Auto Certificate",
-        description:
-          "Relax your mind and uplift your energy with our unique 21-day music therapy program...",
-      },
-    ],
-    []
-  );
-
-  const sectionRef = useRef(null);
-  const cardHeight = 500; // each card's visible height
-  const [scrollY, setScrollY] = useState(0);
-  const [sectionTop, setSectionTop] = useState(0);
-
-  // Track scroll
-  useLayoutEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Track section position on resize or mount
-  useLayoutEffect(() => {
-    const updatePosition = () => {
-      if (sectionRef.current) {
-        setSectionTop(sectionRef.current.offsetTop);
-      }
-    };
-    updatePosition();
-    window.addEventListener("resize", updatePosition);
-    return () => window.removeEventListener("resize", updatePosition);
-  }, []);
-
-  return (
-    <section
-      ref={sectionRef}
-      className="relative px-4 xl:px-0"
-      style={{
-        height: `${items.length * cardHeight}px`, // enough scroll space
-      }}
-    >
-      <h2 className="text-3xl md:text-5xl font-bold text-[#464646] pb-6">
-        Why Choose Us ?
-      </h2>
-
-      <div className="sticky top-20 h-[500px]">
-        {items.map((item, i) => {
-          const cardStart = sectionTop + i * cardHeight;
-          const nextCardStart = sectionTop + (i + 1) * cardHeight;
-
-          // Progress for this card only
-          let translateY = 0;
-          if (scrollY > cardStart) {
-            translateY = -(Math.min(scrollY - cardStart, cardHeight));
-          }
-
-          // Stop moving when next card reaches
-          if (scrollY >= nextCardStart) {
-            translateY = -cardHeight;
-          }
-
-          return (
-            <StackedCard
-              key={i}
-              image={item.image}
-              title={item.title}
-              description={item.description}
-              zIndex={items.length - i}
-              translateY={translateY}
-            />
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-
+export default ChooseCard;
 
 
