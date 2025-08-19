@@ -1,48 +1,28 @@
 import React from "react";
-import "../component/Loader.css";
 
-function Loader({ size = 80, color = "#4fa94d", type = "clip" }) {
+function Loader() {
   const spinnerStyle = {
-    "--spinner-size": `${size}px`,
-    "--spinner-color": color,
+    width: "80px",
+    height: "80px",
+    border: "4px solid #f3f3f3",
+    borderTop: "4px solid #4fa94d",
+    borderRadius: "50%",
+    animation: "spin 1s linear infinite",
+    margin: "20px auto",
+    display: "block"
   };
 
-  const renderSpinner = () => {
-    switch (type) {
-      case "clip":
-        return <div className="clip-loader" style={spinnerStyle}></div>;
-      case "bounce":
-        return <div className="bounce-loader" style={spinnerStyle}></div>;
-      case "pulse":
-        return (
-          <div className="pulse-loader" style={spinnerStyle}>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        );
-      case "grid":
-        return (
-          <div className="grid-loader" style={spinnerStyle}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        );
-      default:
-        return <div className="clip-loader" style={spinnerStyle}></div>;
+  const keyframesStyle = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-  };
+  `;
 
   return (
-    <div className="loader-container">
-      {renderSpinner()}
+    <div>
+      <style>{keyframesStyle}</style>
+      <div style={spinnerStyle}></div>
     </div>
   );
 }
