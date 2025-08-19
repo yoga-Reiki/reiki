@@ -1,20 +1,16 @@
 import React from "react";
-import { RotatingLines } from "react-loader-spinner";
+import { ClipLoader, BounceLoader, GridLoader, PulseLoader } from 'react-spinners';
 
 function Loader() {
   return (
-    <RotatingLines
-      visible={true}
-      height="96"
-      width="96"
-      color="grey"
-      strokeWidth="5"
-      animationDuration="0.75"
-      ariaLabel="rotating-lines-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
-      // -mt-[8.3rem] ml-44
-    />
+    <div>
+      <ClipLoader
+        size={80}
+        color="#4fa94d"
+        loading={true}
+        aria-label="Loading Spinner"
+      />
+    </div>
   );
 }
 

@@ -1,18 +1,18 @@
 import React, { Suspense } from 'react'
-// import Loader from '../views/component/Loader'
+import Loader from '../views/component/Loader'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import routes from '../routes';
 
 function Content() {
     return (
         <div>
-            {/* <Suspense
+            <Suspense
                 fallback={
                     <div className="flex justify-center h-screen">
                         <Loader />
                     </div>
                 }
-            > */}
+            >
                 <Routes>
                     {routes?.map((route, idx) => {
                         return (
@@ -29,7 +29,7 @@ function Content() {
                     })}
                     <Route path="/" element={<Navigate to="/" replace />} />
                 </Routes>
-            {/* </Suspense> */}
+            </Suspense>
         </div>
     )
 }
