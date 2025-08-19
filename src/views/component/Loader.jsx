@@ -8,8 +8,10 @@ function Loader() {
     borderTop: "4px solid #4fa94d",
     borderRadius: "50%",
     animation: "spin 1s linear infinite",
-    margin: "20px auto",
-    display: "block"
+    margin: "auto",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   };
 
   const keyframesStyle = `

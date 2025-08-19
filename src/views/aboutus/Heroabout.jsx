@@ -24,8 +24,9 @@ function ExpandableCard({ title, image, description, isOpen, onToggle }) {
 
             {/* Content */}
             <div
-                className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                    }`}
+                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
             >
                 <p className='px-4 sm:px-6'>{description}</p>
                 <div className="p-4 sm:p-3 text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -37,17 +38,17 @@ function ExpandableCard({ title, image, description, isOpen, onToggle }) {
 }
 
 function Heroabout() {
-    const [openIndex, setOpenIndex] = useState(null);
+    const [openStates, setOpenStates] = useState([false, false]);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
         const applyResponsiveOpenState = () => {
-            const isMobile = window.innerWidth < 1024; // Tailwind lg breakpoint
-            setOpenIndex(prev => {
-                if (isMobile) return null; // close both on mobile
-                // On desktop, if nothing open yet, open Mission by default, else keep user's choice
-                return prev === null ? 1 : prev;
+            const isMobile = window.innerWidth < 1024;
+            setOpenStates(prev => {
+                if (isMobile) return [false, false];
+                if (!prev.includes(true)) return [false, true];
+                return prev;
             });
         };
 
@@ -57,11 +58,15 @@ function Heroabout() {
     }, []);
 
     const toggleCard = (index) => {
-        setOpenIndex(prevIndex => (prevIndex === index ? null : index));
+        setOpenStates(prev => {
+            const newStates = [...prev];
+            newStates[index] = !newStates[index];
+            return newStates;
+        });
     };
 
     return (
-       <section className="relative rounded-3xl overflow-hidden mx-3.5 mt-2 min-h-[500px] sm:min-h-[600px] lg:min-h-[735px]">
+        <section className="relative rounded-3xl overflow-hidden mx-3.5 mt-2 min-h-[500px] sm:min-h-[600px] lg:min-h-[735px]">
             {/* Background Image */}
             <img
                 src={aboutHero}
@@ -87,7 +92,7 @@ function Heroabout() {
                             title="Vision"
                             image={MissionCard}
                             description="To create a world where everyone has access to the transformative power of Reiki healing, fostering a global community of wellness, balance, and spiritual growth."
-                            isOpen={openIndex === 0}
+                            isOpen={openStates[0]}
                             onToggle={() => toggleCard(0)}
                         />
                     </div>
@@ -96,7 +101,7 @@ function Heroabout() {
                             title="Mission"
                             image={MissionCard}
                             description="To offer genuine Reiki healing, learning, and supportive tools that empower people to nurture wellness and awaken their inner energy."
-                            isOpen={openIndex === 1}
+                            isOpen={openStates[1]}
                             onToggle={() => toggleCard(1)}
                         />
                     </div>

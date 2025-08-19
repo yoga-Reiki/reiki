@@ -1,8 +1,12 @@
 import React from 'react'
 import image1 from '../../assets/img/Img1.png'
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 function Introsection() {
+
+    const navigate = useNavigate()
+
     return (
         <section className="relative w-full bg-white px-4 xl:px-0 py-9 sm:py-14 md:py-16">
             <div className="flex flex-col items-center text-center">
@@ -31,7 +35,7 @@ function Introsection() {
 
                     {/* Button */}
                     <div className="relative inline-block rounded-full px-[5px] py-[3px] hover:bg-none bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] mt-2">
-                        <button className="inline-flex items-center space-x-1.5 px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base w-full h-full">
+                        <button onClick={() => navigate("/error")} className="inline-flex items-center space-x-1.5 px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base w-full h-full">
                             <span>Know More</span>
                             <IoIosArrowRoundForward size={28} />  
                         </button>
