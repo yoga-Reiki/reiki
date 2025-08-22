@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Hero_background from '../../assets/video/hero video.mp4'
 import Hero_avtar from '../../assets/img/hero avtar.png'
 import icon1 from '../../assets/img/Reiki Symbols 1.png'
@@ -6,8 +6,11 @@ import icon2 from '../../assets/img/Reiki Symbols 2.png'
 import icon3 from '../../assets/img/Reiki Symbols 3.png'
 import icon4 from '../../assets/img/Reiki Symbols 4.png'
 import icon5 from '../../assets/img/Reiki Symbols 5.png'
+import { PopupModal } from 'react-calendly'
 
 function Herosection() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section className="relative rounded-3xl overflow-hidden mx-3.5 mt-2 min-h-[500px] sm:min-h-[600px] lg:min-h-[735px]">
       {/* Background Video */}
@@ -47,10 +50,10 @@ function Herosection() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start w-full sm:w-auto">
             <div className="relative inline-block rounded-full px-[4px] py-[2px] hover:bg-none bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] hover:cursor-pointer">
               <button className="px-5 sm:px-6 py-1.5 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base">
-                Get 21 days free music therapy
+                Explore all the Courses
               </button>
             </div>
-            <button className="px-5 sm:px-6 py-1.5 sm:py-3 bg-transparent text-[#F8F8F8] rounded-full text-sm border-2 border-white hover:bg-white hover:text-[#EA7913] hover:cursor-pointer transition">
+            <button onClick={() => setIsOpen(true)} className="px-5 sm:px-6 py-1.5 sm:py-3 bg-transparent text-[#F8F8F8] rounded-full text-sm border-2 border-white hover:bg-white hover:text-[#EA7913] hover:cursor-pointer transition">
               Free Consulting
             </button>
           </div>
@@ -69,6 +72,14 @@ function Herosection() {
           </div>
         ))}
       </div>
+
+      {/* Calendly Popup */}
+      <PopupModal
+        url="https://calendly.com"
+        onModalClose={() => setIsOpen(false)}
+        open={isOpen}
+        rootElement={document.getElementById("root")}
+      />
     </section>
   )
 }

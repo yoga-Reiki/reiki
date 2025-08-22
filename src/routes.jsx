@@ -7,6 +7,7 @@ const MusicTherapy = React.lazy(() => import("./views/musicTherapy/index"));
 const TherapyDetail = React.lazy(() => import("./views/musicTherapy/therapy_Detail/index"));
 const Contactus = React.lazy(() => import("./views/contactUs/index"));
 const ErrorPage = React.lazy(() => import("./views/errorPage/Error"))
+const Blog = React.lazy(() => import("./views/blog/index"))
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: "/therapy-detail",
     name: "Therapy Detail",
     element: TherapyDetail
+  },
+  {
+    path: "/blog",
+    name: "Blog",
+    element: Blog
   },
   {
     path: "/contact-us",
