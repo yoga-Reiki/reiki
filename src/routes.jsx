@@ -1,4 +1,3 @@
-import { element } from "prop-types";
 import React from "react";
 
 const Homepage = React.lazy(() => import("./views/homepage/index"));
@@ -8,6 +7,8 @@ const TherapyDetail = React.lazy(() => import("./views/musicTherapy/therapy_Deta
 const Contactus = React.lazy(() => import("./views/contactUs/index"));
 const ErrorPage = React.lazy(() => import("./views/errorPage/Error"))
 const Blog = React.lazy(() => import("./views/blog/index"))
+const Blog_Detail = React.lazy(() => import("./views/blog/blogDetail/index"))
+const Gallery = React.lazy(() => import("./views/Gallery/index"))
 
 const routes = [
   {
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: "/music-therapy",
-    name: "Music Therapy",  
+    name: "Music Therapy",
     element: MusicTherapy
   },
   {
@@ -31,9 +32,19 @@ const routes = [
     element: TherapyDetail
   },
   {
+    path: "/gallery",
+    name: "Gallery",
+    element: Gallery
+  },
+  {
     path: "/blog",
     name: "Blog",
     element: Blog
+  },
+  {
+    path: "/blog/:blogid",
+    name: "Blog detail",
+    element: Blog_Detail
   },
   {
     path: "/contact-us",
@@ -43,7 +54,7 @@ const routes = [
   {
     path: "/error",
     name: "Error",
-   element: ErrorPage
+    element: ErrorPage
   }
 ];
 
