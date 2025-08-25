@@ -93,13 +93,13 @@ function Blogs() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-12">
-                {blogData.map((blog) => (
-                    <div onClick={() => navigate(`/blog/${blog.id}`)} key={blog.id} className="rounded-t-3xl cursor-pointer overflow-hidden transform transition duration-300 hover:scale-105">
+                {blogData.map((data) => (
+                    <div onClick={() => navigate(`/blog/${data.id}`)} key={data.id} className="rounded-t-3xl cursor-pointer overflow-hidden ">
                         {/* Image */}
                         <div className="relative h-48 md:h-56 overflow-hidden">
                             <img
-                                src={blog.image}
-                                alt={blog.title}
+                                src={data.image}
+                                alt={data.title}
                                 className="w-full h-full rounded-3xl object-cover "
                             />
                         </div>
@@ -109,10 +109,10 @@ function Blogs() {
                             <div className='flex justify-between items-start'>
                                 <div className='w-72'>
                                     <h3 className="text-lg md:text-2xl font-bold mb-2">
-                                        {blog.title}
+                                        {data.title}
                                     </h3>
                                     <p className="text-sm text-[#525252] pt-2 line-clamp-3">
-                                        {blog.description}
+                                        {data.description}
                                     </p>
                                 </div>
                                 <div className="relative inline-block rounded-full p-[3px] bg-[linear-gradient(90deg,_rgba(255,121,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">

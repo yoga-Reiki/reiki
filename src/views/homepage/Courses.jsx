@@ -14,37 +14,69 @@ function Courses() {
         {
             id: 1,
             title: "Music therapy",
-            subtitle: "Heal Through Sound",
+            points: [
+                "Introduction to Reiki Level 1",
+                "History and how Reiki works",
+                "Principals of Reiki",
+                "Bath with salt water",
+                "Benefits of Reiki"
+            ],
             image: Course1
         },
         {
             id: 2,
             title: "Yoga Course",
-            subtitle: "Breathe, Flow, Heal.",
+            points: [
+                "Explain how to draw Reiki symbols",
+                "How to charge room and office",
+                "How to perform personal and distance Reiki",
+                "7 chakras powerful method and meditation for chakra",
+                "How can water be charge"
+            ],
             image: Course2
         },
         {
             id: 3,
             title: "Reiki Healing",
-            subtitle: "Energy for Wellness",
+            points: [
+                "Reiki Level 3 master symbol",
+                "Distance Reiki and aura operation",
+                "Reiki Kavach Protection (Family, Home, Vehicles)",
+            ],
             image: Course3
         },
         {
             id: 4,
             title: "Meditation",
-            subtitle: "Mindful Living",
+            points: [
+                "Introduction to Reiki Level 1",
+                "History and how Reiki works",
+                "Principals of Reiki",
+                "Bath with salt water",
+                "Benefits of Reiki"
+            ],
             image: Course1
         },
         {
             id: 5,
             title: "Crystal Healing",
-            subtitle: "Natural Energy",
+            points: [
+                "Explain how to draw Reiki symbols",
+                "How to charge room and office",
+                "How to perform personal and distance Reiki",
+                "7 chakras powerful method and meditation for chakra",
+                "How can water be charge"
+            ],
             image: Course2
         },
         {
             id: 6,
             title: "Aromatherapy",
-            subtitle: "Scent for Healing",
+            points: [
+                "Reiki Level 3 master symbol",
+                "Distance Reiki and aura operation",
+                "Reiki Kavach Protection (Family, Home, Vehicles)",
+            ],
             image: Course3
         }
     ]
@@ -123,21 +155,21 @@ function Courses() {
                             transform: `translateX(-${currentSlide * (100 / courses.length)}%)`
                         }}
                     >
-                        {courses.map((course, index) => (
+                        {courses.map((item, index) => (
                             <div
-                                key={course.id}
-                                className="pr-3 md:pr-8"
+                                key={item.id}
+                                className="px-1.5 md:px-4 py-4 transform hover:scale-105 transition-all duration-300"
                                 style={{
                                     width: `calc(100% / ${courses.length})`,
                                     minWidth: 0
                                 }}
                             >
-                                <div className="bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
+                                <div className="bg-white rounded-2xl">
                                     {/* Course Image */}
                                     <div className="relative overflow-hidden">
                                         <img
-                                            src={course.image}
-                                            alt={course.title}
+                                            src={item.image}
+                                            alt={item.title}
                                             className="w-full h-full object-cover"
                                         />
                                         {/* Play Button Overlay */}
@@ -147,13 +179,15 @@ function Courses() {
                                             </button>
                                         </div>
                                         {/* Course Content */}
-                                        <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-white bg-opacity-90 backdrop-blur-md py-4 rounded-3xl text-center">
+                                        <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-white bg-opacity-90 h-53 backdrop-blur-md p-4.5 rounded-3xl space-y-1">
                                             <h3 className="text-2xl font-bold text-[#292929]">
-                                                {course.title}
+                                                {item.title}
                                             </h3>
-                                            <p className="text-[#525252] text-lg">
-                                                {course.subtitle}
-                                            </p>
+                                            <ul className="list-disc pl-5 text-[#656565]">
+                                                {item?.points?.map((point) => (
+                                                    <li>{point}</li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -164,8 +198,8 @@ function Courses() {
 
                 {/* Explore More Button */}
                 <div className="text-center mt-12">
-                    <div className="relative inline-block rounded-full px-[5px] py-[3px] hover:bg-none bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] mt-2">
-                        <button className="inline-flex items-center space-x-1.5 px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base w-full h-full">
+                    <div className="relative inline-block rounded-full px-[5px] py-[3px] bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] mt-2 hover:from-[#F39C2C] hover:via-[#F39C2C] hover:to-[#F39C2C] active:from-[#EA7913] active:via-[#EA7913] active:to-[#EA7913]">
+                        <button className="inline-flex items-center space-x-1.5 px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base w-full h-full">
                             <span>Explore More</span>
                             <IoIosArrowRoundForward size={28} />
                         </button>

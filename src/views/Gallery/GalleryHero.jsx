@@ -9,7 +9,7 @@ function GalleryHero() {
                 <img
                     src={galleryHero}
                     alt="Reiki healing session"
-                    className="absolute inset-0 w-full h-full object-fill bg-[#cfd8dc]/20 z-10"
+                    className="absolute inset-0 w-full h-full object-cover bg-[#cfd8dc]/20 z-10"
                 />
 
                 {/* Content */}

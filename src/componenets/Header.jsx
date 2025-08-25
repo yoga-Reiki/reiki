@@ -41,7 +41,7 @@ function Header() {
         <header className="w-full bg-white font-[Open Sans]">
             <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 lg:px-8 relative">
                 {/* Left Nav (desktop) */}
-                <div className="hidden lg:flex items-center gap-8">
+                <div className="hidden lg:flex items-center gap-8 lg:gap-6 xl:gap-8">
                     {renderLinks().slice(0, 4)}
                 </div>
 
@@ -57,7 +57,7 @@ function Header() {
                 </div>
 
                 {/* Right Nav (desktop) */}
-                <div className="hidden lg:flex items-center gap-8">
+                <div className="hidden lg:flex items-center gap-8 lg:gap-6 xl:gap-8">
                     {renderLinks().slice(4)}
                     <div className="relative inline-block rounded-full p-[3px] hover:bg-none bg-[linear-gradient(90deg,_rgba(255,121,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">
                         <button onClick={() => setShowLogin(true)} className="inline-flex items-center space-x-1.5 px-8 py-2 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-lg w-full h-full border-[linear-gradient(90deg,_rgba(255,1    21,0,1)_0%,_rgba(234,211,190,1)_50%,_rgba(255,121,0,1)_100%)]">

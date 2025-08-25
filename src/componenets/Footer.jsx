@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom'
 function Footer() {
   return (
     <div className='overflow-hidden max-w-[1440px] mx-auto px-4 xl:px-[100px] pb-9 sm:pb-14 md:pb-16'>
-      <footer className="bg-[#FEF8EC] rounded-3xl text-[#464646] px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8 md:py-12 lg:py-15">
+      <footer className="bg-[#FEF8EC] rounded-3xl text-[#464646] p-6 sm:p-8 md:p-12 lg:p-15">
 
         <div>
           {/* Responsive Grid - Same Design, Better Responsiveness */}
-          <div className="grid grid-cols-1 lg:grid-cols-[343px_1fr] gap-14 lg:gap-14 xl:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-14 xl:gap-16">
 
             <div className="space-y-4 flex flex-col justify-between w-full lg:w-[343px]">
               <div>
@@ -44,9 +44,8 @@ function Footer() {
             </div>
 
             {/* Right Column - Navigation & Buttons (Same Design) */}
-            <div className="space-y-4 flex flex-col justify-between w-full lg:w-auto">
-
-              <div className='grid grid-cols-3 gap-6 sm:gap-8 lg:gap-8 xl:gap-12'>
+            <div className="space-y-4 flex flex-col justify-end">
+              <div className='grid grid-cols-2'>
                 <div className="space-y-2 text-sm md:text-lg">
                   <Link to={"/"} className="block hover:text-[#EA7913] transition-colors">Home</Link>
                   <Link to={"/$"} className="block hover:text-[#EA7913] transition-colors">About Us</Link>
@@ -56,7 +55,7 @@ function Footer() {
                   <Link to={"/$"} className="block hover:text-[#EA7913] transition-colors">Blog</Link>
                   <Link to={"/$"} className="block hover:text-[#EA7913] transition-colors">Contact Us</Link>
                 </div>
-                <div className="space-y-4">
+                {/* <div className="space-y-4">
                   <div className="space-y-2 text-sm md:text-lg">
                     <Link to={"/@"} className="block hover:text-[#EA7913] transition-colors">Courses</Link>
                     <Link to={"/@"} className="block hover:text-[#EA7913] transition-colors">Courses 1</Link>
@@ -65,10 +64,10 @@ function Footer() {
                     <Link to={"/@"} className="block hover:text-[#EA7913] transition-colors">Courses 4</Link>
                     <Link to={"/@"} className="block hover:text-[#EA7913] transition-colors">Courses 5</Link>
                   </div>
-                </div>
+                </div> */}
                 <div className="space-y-2 text-sm md:text-lg w-full sm:w-auto flex flex-col">
                   <Link to={"/$"} className="font-medium text-[#464646]">Get Free consulting</Link>
-                  <Link to={"/$"} className="font-medium text-[#464646]">Get Free 21 Days Music Therapy</Link>
+                  <Link to={"/$"} className="font-medium text-[#464646]">Get in Touch</Link>
                 </div>
               </div>
 
@@ -77,8 +76,8 @@ function Footer() {
                 <button className="bg-[#FCEAC9] px-6 py-2 sm:py-3 rounded-full font-medium border-2 border-[#FCEAC9] hover:bg-[#FEF8EC] transition-colors hover:cursor-pointer">
                   Login
                 </button>
-                <div className="relative inline-block rounded-full px-[5px] py-[3px] hover:bg-none bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900]">
-                  <button className="inline-flex items-center space-x-1.5 px-5 sm:px-22 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium shadow hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base">
+                <div className="relative inline-block rounded-full px-[5px] py-[3px] hover:bg-gradient-[#EA7913] bg-gradient-to-r from-[#FF7900] via-[#EAD3BE] to-[#FF7900] hover:from-[#F39C2C] hover:via-[#F39C2C] hover:to-[#F39C2C] active:from-[#EA7913] active:via-[#EA7913] active:to-[#EA7913]">
+                  <button className="inline-flex items-center space-x-1.5 px-5 sm:px-6 py-2 sm:py-3 bg-[#EA7913] text-[#F8F8F8] rounded-full font-medium hover:cursor-pointer hover:bg-[#F39C2C] active:bg-[#EA7913] transition text-base">
                     Get in Touch
                   </button>
                 </div>
